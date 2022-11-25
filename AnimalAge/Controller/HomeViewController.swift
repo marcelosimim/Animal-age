@@ -8,8 +8,8 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    private let animalsSize: [AnimalSize] = AnimalSize.allCases
-    private var currentType: Int = 0
+    private let animalsSize = AnimalSize.allCases
+    private var currentType = 0
     private var homeView: HomeViewProtocol = HomeView()
 
     override func viewDidLoad() {
@@ -24,18 +24,9 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeViewDelegate {
-    func didTapNext() {
-        if !isLastImage(currentType) {
-            currentType += 1
-            updateView()
-        }
-    }
-
-    func didTapPrevious() {
-        if !isFirstImage(currentType) {
-            currentType -= 1
-            updateView()
-        }
+    func didChangeType(_ type: AnimalSize) {
+        currentType = animalsSize.firstIndex(of: type) ?? 0
+        updateView()
     }
 
     func didChangeYear(_ year: Int) {

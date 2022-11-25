@@ -8,8 +8,7 @@
 import UIKit
 
 protocol HomeViewDelegate: AnyObject {
-    func didTapNext()
-    func didTapPrevious()
+    func didChangeType(_ type: AnimalSize)
     func didChangeYear(_ year: Int)
     func recalculateAge(_ year: Int)
 }
@@ -22,6 +21,14 @@ protocol HomeViewProtocol {
 }
 
 class HomeView: UIView, HomeViewProtocol {
+    private lazy var typeControl: UISegmentedControl = {
+        let items = AnimalSize.allCases.map { $0.title }
+        let control = UISegmentedControl(items: items)
+        control.selectedSegmentIndex = 0
+        control.addTarget(self, action: #selector(didTapTypeControl(_:)), for: .valueChanged)
+        return control
+    }()
+
     private lazy var animalSizeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = .little
@@ -38,22 +45,6 @@ class HomeView: UIView, HomeViewProtocol {
         label.textColor = .systemYellow
         label.textAlignment = .center
         return label
-    }()
-
-    private lazy var nextImageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.arrowRight, for: .normal)
-        button.tintColor = .green
-        button.addTarget(self, action: #selector(didTapNext), for: .touchUpInside)
-        return button
-    }()
-
-    private lazy var previousImageButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.arrowLeft, for: .normal)
-        button.tintColor = .blue
-        button.addTarget(self, action: #selector(didTapPrevious), for: .touchUpInside)
-        return button
     }()
 
     private lazy var yearOfBirthLabel: UILabel = {
@@ -89,23 +80,21 @@ class HomeView: UIView, HomeViewProtocol {
     }
 
     private func addViews() {
-        addSubviews([animalSizeImage, nextImageButton, previousImageButton, animalSizeLabel, yearOfBirthLabel, yearPicker, ageLabel])
+        addSubviews([typeControl, animalSizeImage, animalSizeLabel, yearOfBirthLabel, yearPicker, ageLabel])
 
         setupConstraints()
     }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            animalSizeImage.topAnchor.constraint(equalTo: topAnchor, constant: 100),
+            typeControl.topAnchor.constraint(equalTo: topAnchor, constant: 100),
+            typeControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 64),
+            typeControl.centerXAnchor.constraint(equalTo: centerXAnchor),
+
+            animalSizeImage.topAnchor.constraint(equalTo: typeControl.bottomAnchor, constant: 32),
             animalSizeImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 64),
             animalSizeImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             animalSizeImage.heightAnchor.constraint(equalToConstant: 250),
-
-            nextImageButton.centerYAnchor.constraint(equalTo: animalSizeImage.centerYAnchor),
-            nextImageButton.leadingAnchor.constraint(equalTo: animalSizeImage.trailingAnchor, constant: 16),
-
-            previousImageButton.centerYAnchor.constraint(equalTo: animalSizeImage.centerYAnchor),
-            previousImageButton.trailingAnchor.constraint(equalTo: animalSizeImage.leadingAnchor, constant: -16),
 
             animalSizeLabel.topAnchor.constraint(equalTo: animalSizeImage.bottomAnchor, constant: 32),
             animalSizeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
@@ -125,23 +114,20 @@ class HomeView: UIView, HomeViewProtocol {
         ])
     }
 
-    @objc private func didTapNext() {
-        delegate?.didTapNext()
-        delegate?.recalculateAge(selectedYear)
-    }
-
-    @objc private func didTapPrevious() {
-        delegate?.didTapPrevious()
-        delegate?.recalculateAge(selectedYear)
-    }
-
     func updateView(image: UIImage, text: String) {
         animalSizeImage.image = image
         animalSizeLabel.text = text
     }
 
     func updateAge(_ age: Double) {
-        ageLabel.text = "Idade em anos humanos: \(age)"
+        ageLabel.text = "Idade em anos humanos: \(String(format: "%.1f", age))"
+    }
+
+    @objc private func didTapTypeControl(_ sender: UISegmentedControl) {
+        let selectedIndex = sender.selectedSegmentIndex
+        let type = AnimalSize.allCases[selectedIndex]
+        delegate?.didChangeType(type)
+        delegate?.recalculateAge(selectedYear)
     }
 }
 
