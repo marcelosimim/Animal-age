@@ -15,6 +15,7 @@
 		A387F6542930EA9200BDF2C3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A387F6532930EA9200BDF2C3 /* HomeView.swift */; };
 		A387F6572930EC1200BDF2C3 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A387F6562930EC1200BDF2C3 /* UIImage.swift */; };
 		A387F6592930F0BB00BDF2C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A387F6582930F0BB00BDF2C3 /* UIView.swift */; };
+		A387F65C2930FBA300BDF2C3 /* AnimalSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A387F65B2930FBA300BDF2C3 /* AnimalSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A387F6532930EA9200BDF2C3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A387F6562930EC1200BDF2C3 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		A387F6582930F0BB00BDF2C3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		A387F65B2930FBA300BDF2C3 /* AnimalSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		A387F6372930E95700BDF2C3 /* AnimalAge */ = {
 			isa = PBXGroup;
 			children = (
+				A387F65A2930FB9400BDF2C3 /* Enum */,
 				A387F64C2930E98400BDF2C3 /* AppDelegate */,
 				A387F6552930EBFC00BDF2C3 /* Extensions */,
 				A387F64F2930E99B00BDF2C3 /* Model */,
@@ -119,6 +122,14 @@
 				A387F6582930F0BB00BDF2C3 /* UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A387F65A2930FB9400BDF2C3 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				A387F65B2930FBA300BDF2C3 /* AnimalSize.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +206,7 @@
 				A387F6572930EC1200BDF2C3 /* UIImage.swift in Sources */,
 				A387F6542930EA9200BDF2C3 /* HomeView.swift in Sources */,
 				A387F63B2930E95700BDF2C3 /* SceneDelegate.swift in Sources */,
+				A387F65C2930FBA300BDF2C3 /* AnimalSize.swift in Sources */,
 				A387F6592930F0BB00BDF2C3 /* UIView.swift in Sources */,
 				A387F6522930EA5E00BDF2C3 /* HomeViewController.swift in Sources */,
 			);
