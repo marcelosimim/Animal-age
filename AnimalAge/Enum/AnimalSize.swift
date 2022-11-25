@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AnimalSize {
+enum AnimalSize: CaseIterable {
     case little
     case medium
     case big
@@ -22,7 +22,7 @@ enum AnimalSize {
                 return 7.5
         }
     }
-    
+
     var title: String {
         switch self {
             case .little:

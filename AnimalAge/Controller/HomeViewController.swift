@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    private let animalsSize: [AnimalSize] = [.little, .medium, .big]
+    private let animalsSize: [AnimalSize] = AnimalSize.allCases
     private var currentType: Int = 0
     private var homeView: HomeViewProtocol = HomeView()
 
@@ -70,7 +70,7 @@ extension HomeViewController: HomeViewDelegate {
     private func calcuteAge(_ year: Int) -> Double {
         let type = animalsSize[currentType]
         let currentYear = Calendar.current.component(.year, from: Date())
-        var age:Double = Double(currentYear - year)
+        let age = Double(currentYear - year)
 
         return age * type.multiplier
     }
