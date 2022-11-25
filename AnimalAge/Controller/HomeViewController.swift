@@ -72,17 +72,13 @@ extension HomeViewController: HomeViewDelegate {
         let currentYear = Calendar.current.component(.year, from: Date())
         var age:Double = Double(currentYear - year)
 
-        if type == .little { age *= 6 }
-        else if type == .medium { age *= 7 }
-        else if type == .big { age *= 7.5 }
-
-        return age
+        return age * type.multiplier
     }
 
     private func updateView() {
         let animalSize = animalsSize[currentType]
         let image = getAnimalImage(for: animalSize)
-        homeView.updateView(image: image, text: animalSize.rawValue)
+        homeView.updateView(image: image, text: animalSize.title)
     }
 
     private func updateAge(_ age: Double) {
