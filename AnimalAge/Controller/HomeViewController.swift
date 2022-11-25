@@ -86,7 +86,6 @@ extension HomeViewController: HomeViewDelegate {
     }
 
     private func updateAge(_ age: Double) {
-        print(age)
         homeView.updateAge(age)
     }
 }
